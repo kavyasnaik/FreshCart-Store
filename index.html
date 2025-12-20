@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FreshCart - Premium Grocery Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header>
+  <div class="header-container">
+    <div class="logo">🍏 FreshCart</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Shop</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="cart-icon" id="cartIcon">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-count" id="cartCount">0</span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home">
+  <h1>Welcome to FreshCart</h1>
+  <p>Premium organic groceries delivered fresh to your door. Shop from
+            1000+ farm-fresh products with same-day delivery guarantee.</p>
+  <a href="#products" class="hero-btn">🛒 Shop Fresh Now</a>
+</section>
+
+<!-- FEATURES -->
+    <section id="about">
+        <div class="container">
+            <h2>Why Shop With Us?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3>Lightning Fast Delivery</h3>
+                    <p>Groceries delivered in minutes in selected locations.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-seedling"></i>
+                    <h3>100% Fresh</h3>
+                    <p>Daily picked fruits and vegetables from trusted farms.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-wallet"></i>
+                    <h3>Best Prices</h3>
+                    <p>App-like offers and combo deals on essentials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="container">
+    <h2>Fresh Fruits & Vegetables</h2>
+    <div class="products-grid" id="productsGrid"></div>
+
+    <div class="order-bar">
+      <div class="order-summary">
+        Items: <span id="orderItems">0</span> |
+        Total: <span id="orderTotal">₹0</span>
+      </div>
+      <button class="btn-place-order" onclick="confirmOrder()">
+        Place Order
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- CART MODAL -->
+<div class="cart-modal-backdrop" id="cartModal">
+  <div class="cart-modal">
+    <h3>Your Cart</h3>
+    <ul id="cartList"></ul>
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cartModalTotal">₹0</span>
+    </div>
+    <button class="btn-close-modal" onclick="closeCartModal()">Close</button>
+    <button class="btn-confirm" onclick="confirmOrder()">Confirm Order</button>
+  </div>
+</div>
+
+<!-- ORDER CONFIRM -->
+<div class="cart-modal-backdrop" id="orderConfirmModal" style="display:none;">
+  <div class="cart-modal">
+    <h3>Confirm Your Order</h3>
+    <p>Payment Method: Cash on Delivery</p>
+    <button class="btn-confirm" onclick="finalizeOrder()">Confirm</button>
+    <button class="btn-close-modal" onclick="closeOrderConfirmModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Have questions or feedback? Reach out to us using the details below.</p>
+            <div class="contact-info">
+                <p><strong>Email:</strong> kavya@freshcart.com</p>
+                <p><strong>Phone:</strong> +91 9902166325</p>
+                <p><strong>Address:</strong> FreshCart Store, near Dayananda Sagar College, Kumarswamy Layout,  Fresh Street, Banglore, India</p>
+            </div>
+        </div>
+    </section>
+
+
+<!-- FEEDBACK MODAL (NO X BUTTON) -->
+<div class="cart-modal-backdrop" id="feedbackModal" style="display:none;">
+  <div class="cart-modal">
+
+    <h3>Help us improve FreshCart 🥦🍎</h3>
+
+    <form id="feedbackForm">
+
+      <label class="feedback-label">⭐ Quality of fruits & vegetables</label>
+      <select id="productRating" required>
+        <option value="">Select rating</option>
+        <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+        <option value="4">⭐⭐⭐⭐ Good</option>
+        <option value="3">⭐⭐⭐ Average</option>
+        <option value="2">⭐⭐ Poor</option>
+        <option value="1">⭐ Very Poor</option>
+      </select>
+
+      <label class="feedback-label">⭐ Delivery experience</label>
+      <select id="deliveryRating" required>
+        <option value="">Select rating</option>
+        <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+        <option value="4">⭐⭐⭐⭐ Good</option>
+        <option value="3">⭐⭐⭐ Average</option>
+        <option value="2">⭐⭐ Poor</option>
+        <option value="1">⭐ Very Poor</option>
+      </select>
+
+      <label class="feedback-label">How did you find FreshCart?</label>
+      <select id="feedbackSource" required>
+        <option value="">Select source</option>
+        <option value="Google Search">Google Search</option>
+        <option value="Social Media">Social Media</option>
+        <option value="Friends / Family">Friends / Family</option>
+        <option value="Advertisement">Advertisement</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label class="feedback-label">Email</label>
+      <input type="email" id="feedbackEmail" required />
+
+      <label class="feedback-label">Comments</label>
+      <textarea id="feedbackMessage"></textarea>
+
+      <div style="margin-top:0.8rem; display:flex; gap:0.5rem;">
+        <button type="submit" class="btn-confirm" style="flex:1;">
+          Submit Feedback
+        </button>
+        <button type="button" class="btn-close-modal" onclick="exitTab()">
+          Exit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
