@@ -164,9 +164,17 @@ function setupFeedbackForm() {
       return;
     }
 
+    const phone = document.getElementById("feedbackPhone").value.trim();
+    const phoneRegex = /^[6-9]\d{9}$/;
+    if (!phoneRegex.test(phone)) {
+      alert("Please enter a valid phone number");
+      return;
+    }
+
     const data = {
       timestamp: new Date().toLocaleString("en-IN"),
       email: email,
+      phone: phone,
       productRating: document.getElementById("productRating").value,
       deliveryRating: document.getElementById("deliveryRating").value,
       source: document.getElementById("feedbackSource").value,
@@ -174,8 +182,7 @@ function setupFeedbackForm() {
     };
 
     const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbzCC-xdh2-hdeGgD34-6EvD_LmZd5edsHchlufo7YFKf7V6I6YEct17Vsryitp5aQ8Erw/exec";
-
+            "https://script.google.com/macros/s/AKfycbzCC-xdh2-hdeGgD34-6EvD_LmZd5edsHchlufo7YFKf7V6I6YEct17Vsryitp5aQ8Erw/exec"
     fetch(SCRIPT_URL, {
       method: "POST",
       mode: "no-cors",
